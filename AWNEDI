@@ -1,0 +1,27 @@
+import pyad.adquery
+
+# Set the base DN to search from
+
+base_dn = "DC=yourdomain,DC=com"
+
+# Set the filter to search for users with no expiration date set
+
+filter = "(&(objectClass=user)(accountExpires=0))"
+
+# Create a new AD query object
+
+q = pyad.adquery.ADQuery()
+
+# Execute the query to search for users with no expiration date set
+
+q.execute_query(attributes=["sAMAccountName"], where_clause=filter, base_dn=base_dn)
+
+# Print the list of users with no expiration date set
+
+print("List of AD accounts set with no expiration date:")
+
+for row in q.get_results():
+
+    print(row["sAMAccountName"])
+    
+    
